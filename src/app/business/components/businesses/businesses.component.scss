@@ -1,0 +1,43 @@
+.derecha {
+    text-align: right;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-form-field {
+    width: 25%;
+    text-align: right;
+    color: black;
+    margin-left: auto;
+}
+
+.example-form-field-width75 {
+    width: 70%;
+    text-align: right;
+    color: black;
+    margin-left: auto;
+    size: 5px;
+}
+
+mat-expansion-panel {
+    background-color: #F0F7FB;
+    width: auto;
+}
+
+.example-card {
+    max-width: 100%;
+    max-height: inherit;
+}
+  
+.example-header-image {
+    background-image: url('https://eshendetesia.com/images/user-profile.png');
+    background-size: cover;
+}
+
+.imgCard {
+      width: 90%;
+      height: 90%;
+      margin: 0 5% 0 5%;
+}
