@@ -31,7 +31,8 @@
 
     <!--     Fonts and icons     -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet'
+        type='text/css'>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR-KEY-HERE"></script>
 
 </head>
@@ -40,27 +41,51 @@
     <app-root>
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
-          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-      </svg>
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
         </div>
     </app-root>
     <mat-toolbar color="primary">
-        <mat-toolbar-row>
-            <span>Bienvenido {{ userName }}</span>
-            <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-            <span class="example-spacer"></span>
+        <mat-toolbar-row class="cajaPrincipal_de_Header">
+            <div class="caja_ladoIzqHeader">
+                <span>Bienvenido {{ userName }}</span>
+                <button mat-icon-button (click)="drawer.toggle()" class="example-icon"
+                    aria-label="Example icon-button with menu icon">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+
+            <!-- <span class="example-spacer"></span> -->
+
+            <div class="caja_botones">
+                <!--botones-->
+                <button mat-button class="botns_menus" *ngFor="let x of categoryParams" (click)="select(x.value)">{{x.viewValue}}</button>
+                <!--SELECT-->
+                <!-- <mat-form-field appearance="" class="select-category caja_select">
+                    <mat-label>Seleccione Configuración</mat-label>
+                    <mat-select (selectionChange)="select($event.value)">
+                        <mat-option *ngFor="let categoryParam of categoryParams" [value]="categoryParam.value">
+                            {{categoryParam.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+               </div>
+
+            <div class="caja_ladoDerHeader">
+
             <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>person</mat-icon>
-      </button>
-            <button mat-icon-button class="example-icon" (click)="logoutSession()" aria-label="Example icon-button with share icon">
-        <mat-icon>login</mat-icon>
-      </button>
+                <mat-icon>person</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" (click)="logoutSession()"
+                aria-label="Example icon-button with share icon">
+                <mat-icon>login</mat-icon>
+            </button>
+        </div>
+
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <mat-drawer-container class="example-container" autosize>
+    <mat-drawer-container class="example-container" style="height: 100%;" autosize>
         <mat-drawer #drawer [mode]="">
             <!--Menu aqui-->
             <mat-card class="example-card">
@@ -69,7 +94,10 @@
                     <mat-card-title>{{ userName }}</mat-card-title>
                     <mat-card-subtitle>{{ userName }}</mat-card-subtitle>
                 </mat-card-header>
-                <img class="imgCard" mat-card-image src="../../../../assets/images/empresa.jpg" alt="Logo empresa">
+                <div class="imagen_menu">
+                    <img class="imgCard" mat-card-image src="../../../../assets/images/empresa.jpg" alt="Logo empresa">
+                </div>
+                <!-- <img class="imgCard" mat-card-image src="../../../../assets/images/empresa.jpg" alt="Logo empresa"> -->
                 <mat-card-content>
 
                 </mat-card-content>
@@ -77,6 +105,13 @@
                     <mat-action-list>
                         <button mat-list-item (click)="noDisponible()"> Configuración App </button>
                         <button mat-list-item (click)="noDisponible()"> Configuración General </button>
+                        <button mat-list-item (click)="noDisponible()"> Color </button>
+                        <button mat-list-item (click)="noDisponible()"> Inicial </button>
+                        <button mat-list-item (click)="noDisponible()"> Imagenes </button>
+                        <button mat-list-item (click)="noDisponible()"> Login </button>
+                        <button mat-list-item (click)="noDisponible()"> Puntos </button>
+                        <button mat-list-item (click)="noDisponible()"> Registro </button>
+                        <button mat-list-item (click)="noDisponible()"> Vigencia </button>
                         <button mat-list-item (click)="logoutSession()"> Cerrar Sesión</button>
                     </mat-action-list>
                 </mat-card-actions>
@@ -85,478 +120,1018 @@
 
         </mat-drawer>
         <mat-drawer-content>
+            <br>
+            <!-- <div class="caja_botones">
+                <button type="submit" mat-raised-button color="primary" class="botns_menus">Color</button>
+                <button type="submit" mat-raised-button color="primary" class="botns_menus">Inicial</button>
+                <button type="submit" mat-raised-button color="primary" class="botns_menus">Imagenes</button>
+                <button type="submit" mat-raised-button color="primary" class="botns_menus">Login</button>
+                <button type="submit" mat-raised-button color="primary" class="botns_menus">Puntos</button>
+                <button type="submit" mat-raised-button color="primary" class="botns_menus">Registro</button>
+                <button type="submit" mat-raised-button color="primary" class="botns_menus">Vigencia</button>
+            </div> -->
+            
+            <br>
             <div class="main-content">
+                <!-------------------------------SELECT-------------------------------->
+                <div class="caja_select">
+
+               
+                <mat-form-field appearance="" class="select-category ">
+                    <mat-label>Seleccione Configuración</mat-label>
+                    <mat-select (selectionChange)="select($event.value)">
+                        <mat-option *ngFor="let categoryParam of categoryParams" [value]="categoryParam.value">
+                            {{categoryParam.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+
+
                 <div class="container-fluid">
                     <mat-accordion class="example-headers-align" multi>
-                        <!-- Fila número 1-->
-                        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Configuración - 1
-                                </mat-panel-title>
-                                <mat-panel-description>
+                        <!-- <ng-container *ngIf="tipoParam === 'Montos'">
+                            Fila número 1
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Montos
+                                    </mat-panel-title>
+                                    <mat-panel-description>
 
-                                    <mat-icon></mat-icon>
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="card card-stats">
-                                        <form [formGroup]="paramForm0" (ngSubmit)="updateParameter($event, paramForm0)">
-                                            <div class="card-header card-header-warning card-header-icon">
-                                                <div class="card-icon">
-                                                    <em class="material-icons">attach_money</em>
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="row">
+
+
+                                </div>
+                            </mat-expansion-panel>
+                        </ng-container> -->
+                        <ng-container id="hola" *ngIf="tipoParam === 'Puntos'">
+                            <!-- Fila número 2-->
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Puntos
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm0"
+                                                (ngSubmit)="updateParameter($event, paramForm0)">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">attach_money</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm0.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
                                                 </div>
-                                                <h4 class="card-title"><strong>Monto en pesos</strong></h4>
-                                                <mat-form-field class="example-form-field">
-                                                    <mat-label>Valor:</mat-label>
-                                                    <br>
-                                                    <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                    <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                                </mat-form-field>
-                                                <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
                                                 </div>
-                                                <div class="derecha">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm9"
+                                                (ngSubmit)="updateParameter($event, paramForm9)">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">attach_money</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm9.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
                                                 </div>
-                                            </div>
-                                        </form>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm10"
+                                                (ngSubmit)="updateParameter($event, paramForm10)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">attach_money</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm10.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="text" [hidden]="true" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="card card-stats">
-                                        <form [formGroup]="paramForm1" (ngSubmit)="updateParameter($event, paramForm1)">
-                                            <div class="card-header card-header-danger card-header-icon">
-                                                <div class="card-icon">
-                                                    <em class="material-icons">security</em>
+                            </mat-expansion-panel>
+                        </ng-container>
+                        <ng-container *ngIf="tipoParam === 'Login'">
+                            <!-- Fila número 3-->
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Login
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm2"
+                                                (ngSubmit)="updateParameter($event, paramForm2)">
+                                                <div class="card-header card-header-danger card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">security</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm2.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
                                                 </div>
-                                                <h4 class="card-title"><strong>Pedir contraseña</strong></h4>
-                                                <mat-form-field class="example-form-field">
-                                                    <mat-label>Valor:</mat-label>
-                                                    <br>
-                                                    <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                    <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                                </mat-form-field>
-                                                <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
                                                 </div>
-                                                <div class="derecha">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm3"
+                                                (ngSubmit)="updateParameter($event, paramForm3)">
+                                                <div class="card-header card-header-info card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">email</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm3.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
                                                 </div>
-                                            </div>
-                                        </form>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm4"
+                                                (ngSubmit)="updateParameter($event, paramForm4)">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">smartphone</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm4.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="card card-stats">
-                                        <form [formGroup]="paramForm2" (ngSubmit)="updateParameter($event, paramForm2)">
-                                            <div class="card-header card-header-info card-header-icon">
-                                                <div class="card-icon">
-                                                    <em class="material-icons">email</em>
+                            </mat-expansion-panel>
+                        </ng-container>
+                        <ng-container *ngIf="tipoParam === 'Color'">
+                            <!-- Fila número 4-->
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Color
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm5"
+                                                (ngSubmit)="updateParameter($event, paramForm5)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <input type="color" formControlName="sData">
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm5.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input type="color" formControlName="sData" id="newColor">
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="text" [hidden]="true" formControlName="sParametro"
+                                                        class="card-category" readonly />
                                                 </div>
-                                                <h4 class="card-title"><strong>Validar email</strong></h4>
-                                                <mat-form-field class="example-form-field">
-                                                    <mat-label>Valor:</mat-label>
-                                                    <br>
-                                                    <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                    <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                                </mat-form-field>
-                                                <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
                                                 </div>
-                                                <div class="derecha">
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="card card-stats">
-                                        <form [formGroup]="paramForm3" (ngSubmit)="updateParameter($event, paramForm3)">
-                                            <div class="card-header card-header-warning card-header-icon">
-                                                <div class="card-icon">
-                                                    <em class="material-icons">smartphone</em>
+                            </mat-expansion-panel>
+                        </ng-container>
+                        <ng-container *ngIf="tipoParam === 'Vigencia'">
+                            <!-- Fila número 5-->
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Vigencia
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm1"
+                                                (ngSubmit)="updateParameter($event, paramForm1)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">attach_money</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm1.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="text" [hidden]="true" formControlName="sParametro"
+                                                        class="card-category" readonly />
                                                 </div>
-                                                <h4 class="card-title"><strong>Validar teléfono</strong></h4>
-                                                <mat-form-field class="example-form-field">
-                                                    <mat-label>Valor:</mat-label>
-                                                    <br>
-                                                    <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                    <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                                </mat-form-field>
-                                                <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
                                                 </div>
-                                                <div class="derecha">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm6"
+                                                (ngSubmit)="updateParameter($event, paramForm6)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">attach_money</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm6.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="text" [hidden]="true" formControlName="sParametro"
+                                                        class="card-category" readonly />
                                                 </div>
-                                            </div>
-                                        </form>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm7"
+                                                (ngSubmit)="updateParameter($event, paramForm7)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">attach_money</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm7.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="text" [hidden]="true" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm8"
+                                                (ngSubmit)="updateParameter($event, paramForm8)">
+                                                <div class="card-header card-header-danger card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">security</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm8.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </mat-expansion-panel>
+                            </mat-expansion-panel>
+                        </ng-container>
+                        <ng-container *ngIf="tipoParam === 'Registro'">
+                            <!-- Fila número 6-->
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Registro
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm11"
+                                                (ngSubmit)="updateParameter($event, paramForm11)">
+                                                <div class="card-header card-header-info card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">location_on</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm11.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm12"
+                                                (ngSubmit)="updateParameter($event, paramForm12)">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">email</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm12.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm13"
+                                                (ngSubmit)="updateParameter($event, paramForm13)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">add_location</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm13.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm14"
+                                                (ngSubmit)="updateParameter($event, paramForm14)">
+                                                <div class="card-header card-header-danger card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">map</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm14.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm15"
+                                                (ngSubmit)="updateParameter($event, paramForm15)">
+                                                <div class="card-header card-header-info card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">perm_identity</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm15.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm16"
+                                                (ngSubmit)="updateParameter($event, paramForm16)">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">contact_phone</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm16.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" [hidden]="true"
+                                                            formControlName="sData" class="card-category card-title" />
+                                                        <mat-checkbox formControlName="sData" type="checkbox"
+                                                            class="example-margin" [color]="colorInput"></mat-checkbox>
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </ng-container>
+                        <ng-container *ngIf="tipoParam === 'Inicial'">
+                            <!-- Fila número 7-->
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Inicial
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+
+                                <!--codigo de las cards con imagen-->
+                                <!-- <div class="cardImag">
+                                    <div class="cardImag_imagenCard">
+                                        <img src="../../../../assets/images/empresa.jpg" alt="">
+                                    </div>
+
+
+
+                                    <div class="cardImag_btnCard">
+                                        <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                    </div>
+
+                                </div>
+                                <div class="cardImag">
+                                    <div class="cardImag_imagenCard">
+                                        <div class="card-icon">
+                                            <em class="material-icons">menu</em>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="cardImag_btnCard">
+                                        <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                    </div>
+
+                                </div>
+                                <div class="cardImag">
+                                    <div class="cardImag_imagenCard">
+                                        <img src="../../../../assets/images/empresa.jpg" alt="">
+                                    </div>
+
+
+
+                                    <div class="cardImag_btnCard">
+                                        <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                    </div>
+
+                                </div> -->
+
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm17"
+                                                (ngSubmit)="updateParameter($event, paramForm17)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">menu</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm17.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm18"
+                                                (ngSubmit)="updateParameter($event, paramForm18)">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">menu</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm18.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm19"
+                                                (ngSubmit)="updateParameter($event, paramForm19)">
+                                                <div class="card-header card-header-danger card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons"
+                                                            (click)="show(paramForm19.get( 'sData').value, true, false)">privacy_tip</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm19.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm22"
+                                                (ngSubmit)="updateParameter($event, paramForm22)">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <img id="img20" [src]="paramForm22.get( 'sData').value"
+                                                            alt="Anverso" style="width: 23.99px; height: 23.33px;"
+                                                            (click)="show(paramForm22.get( 'sData').value, false, true)" />
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm22.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="card card-stats">
+                                            <form [formGroup]="paramForm23"
+                                                (ngSubmit)="updateParameter($event, paramForm23)">
+                                                <div class="card-header card-header-warning card-header-icon">
+                                                    <div class="card-icon">
+                                                        <em class="material-icons">image</em>
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm23.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </ng-container>
+                        <ng-container *ngIf="tipoParam === 'Imagenes'">
+                            <!-- Fila número 8-->
+                            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Configuración - Imagenes
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                        <mat-icon></mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <!-- <div class="card card-stats">
+                                            <form [formGroup]="paramForm20"
+                                                (ngSubmit)="updateParameter($event, paramForm20)">
+                                                <div class="card-header card-header-info card-header-icon">
+                                                    <div class="card-icon">
+                                                        <img id="img20" [src]="paramForm20.get( 'sData').value"
+                                                            alt="Anverso" style="width: 23.99px; height: 23.33px;"
+                                                            (click)="show(paramForm20.get( 'sData').value, true, true)" />
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm20.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div> -->
+                                    
+                                        <div class="cardImag">
+                                            <div class="cardImag_imagenCard">
+                                                <img src="../../../../assets/images/empresa.jpg" alt="">
+                                            </div>
+        
+        
+        
+                                            <div class="cardImag_btnCard">
+                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                            </div>
+        
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <!-- <div class="card card-stats">
+                                            <form [formGroup]="paramForm21"
+                                                (ngSubmit)="updateParameter($event, paramForm21)">
+                                                <div class="card-header card-header-info card-header-icon">
+                                                    <div class="card-icon">
+                                                        <img id="img20" [src]="paramForm21.get( 'sData').value"
+                                                            alt="Anverso" style="width: 23.99px; height: 23.33px;"
+                                                            (click)="show(paramForm21.get( 'sData').value, true, true)" />
+                                                    </div>
+                                                    <h4 class="card-title"><strong>{{ paramForm21.get('sTexto').value
+                                                            }}</strong></h4>
+                                                    <mat-form-field class="example-form-field">
+                                                        <mat-label>Valor:</mat-label>
+                                                        <br>
+                                                        <input matInput type="text" formControlName="sData"
+                                                            class="card-category card-title" />
+                                                    </mat-form-field>
+                                                    <input type="hidden" formControlName="sParametro"
+                                                        class="card-category" readonly />
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <button type="submit" mat-raised-button
+                                                            color="primary">Actualizar</button>
+                                                    </div>
+                                                    <div class="derecha">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        
+                                        
+                                        
+                                        
+                                        </div> -->
+                                        <div class="cardImag">
+                                            <div class="cardImag_imagenCard">
+                                                <img src="../../../../assets/images/empresa.jpg" alt="">
+                                            </div>
+        
+        
+        
+                                            <div class="cardImag_btnCard">
+                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </ng-container>
                     </mat-accordion>
-                    <!-- Fila número 2-->
-                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Configuración - 2
-                            </mat-panel-title>
-                            <mat-panel-description>
-
-                                <mat-icon></mat-icon>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm4" (ngSubmit)="updateParameter($event, paramForm4)">
-                                        <div class="card-header card-header-success card-header-icon">
-                                            <div class="card-icon">
-                                                <input type="color" formControlName="sData">
-                                            </div>
-                                            <h4 class="card-title"><strong>Color de fondo</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <input type="color" formControlName="sData" id="newColor">
-                                                <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                            </mat-form-field>
-                                            <input type="text" [hidden]="true" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm5" (ngSubmit)="updateParameter($event, paramForm5)">
-                                        <div class="card-header card-header-info card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">location_on</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Registra código postal</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <br>
-                                                <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm6" (ngSubmit)="updateParameter($event, paramForm6)">
-                                        <div class="card-header card-header-warning card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">email</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Registra correo</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <br>
-                                                <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm7" (ngSubmit)="updateParameter($event, paramForm7)">
-                                        <div class="card-header card-header-success card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">add_location</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Registra dirección</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <br>
-                                                <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-expansion-panel>
-                    <!-- Fila número 3-->
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Configuración - 3
-                            </mat-panel-title>
-                            <mat-panel-description>
-
-                                <mat-icon></mat-icon>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm8" (ngSubmit)="updateParameter($event, paramForm8)">
-                                        <div class="card-header card-header-danger card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">map</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Registra estado</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <br>
-                                                <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm9" (ngSubmit)="updateParameter($event, paramForm9)">
-                                        <div class="card-header card-header-info card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">perm_identity</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Registra nombre</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <br>
-                                                <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm10" (ngSubmit)="updateParameter($event, paramForm10)">
-                                        <div class="card-header card-header-warning card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">contact_phone</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Registro teléfono</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <br>
-                                                <input matInput type="text" [hidden]="true" formControlName="sData" class="card-category card-title" />
-                                                <mat-checkbox formControlName="sData" type="checkbox" class="example-margin" [color]="colorInput"></mat-checkbox>
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm11" (ngSubmit)="updateParameter($event, paramForm11)">
-                                        <div class="card-header card-header-success card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">menu</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Nombre de menú</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <input matInput type="text" formControlName="sData" class="card-category card-title" />
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-expansion-panel>
-                    <!-- Fila número 4-->
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Configuración - 4
-                            </mat-panel-title>
-                            <mat-panel-description>
-
-                                <mat-icon></mat-icon>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm12" (ngSubmit)="updateParameter($event, paramForm12)">
-                                        <div class="card-header card-header-danger card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">privacy_tip</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Aviso de privacidad</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <input matInput type="text" formControlName="sData" class="card-category card-title" />
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm13" (ngSubmit)="updateParameter($event, paramForm13)">
-                                        <div class="card-header card-header-info card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">credit_card</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Diseño tarjeta</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <input matInput type="text" formControlName="sData" class="card-category card-title" />
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm14" (ngSubmit)="updateParameter($event, paramForm14)">
-                                        <div class="card-header card-header-info card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">credit_card</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Diseño tarjeta reverso</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <input matInput type="text" formControlName="sData" class="card-category card-title" />
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="card card-stats">
-                                    <form [formGroup]="paramForm15" (ngSubmit)="updateParameter($event, paramForm15)">
-                                        <div class="card-header card-header-warning card-header-icon">
-                                            <div class="card-icon">
-                                                <em class="material-icons">image</em>
-                                            </div>
-                                            <h4 class="card-title"><strong>Logotipo</strong></h4>
-                                            <mat-form-field class="example-form-field">
-                                                <mat-label>Valor:</mat-label>
-                                                <input matInput type="text" formControlName="sData" class="card-category card-title" />
-                                            </mat-form-field>
-                                            <input type="hidden" formControlName="sParametro" class="card-category" readonly/>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="stats">
-                                                <button type="submit" mat-raised-button color="primary">Actualizar</button>
-                                            </div>
-                                            <div class="derecha">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-expansion-panel>
                 </div>
             </div>
         </mat-drawer-content>
     </mat-drawer-container>
-
-
-
+    <!-- Creates the bootstrap modal where the image will appear -->
+    <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div [style.background]="colorModal ? 'white' : 'black'" class="modal-body">
+                    <img *ngIf="typeModal === true" [src]=imgUrl id="imagepreview" style="width: 460px; height: 425px;">
+                    <iframe *ngIf="typeModal === false" [src]=imgUrl style="width: 460px; height: 425px;"
+                        frameborder="0"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

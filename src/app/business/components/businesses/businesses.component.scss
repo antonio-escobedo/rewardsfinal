@@ -7,7 +7,7 @@
 }
 
 .example-form-field {
-    width: 25%;
+    width: 95%;
     text-align: right;
     color: black;
     margin-left: auto;
@@ -30,14 +30,120 @@ mat-expansion-panel {
     max-width: 100%;
     max-height: inherit;
 }
-  
+
 .example-header-image {
     background-image: url('https://eshendetesia.com/images/user-profile.png');
     background-size: cover;
 }
 
 .imgCard {
-      width: 90%;
-      height: 90%;
-      margin: 0 5% 0 5%;
+    width: 90%;
+    height: 90%;
+    margin: 0 5% 0 5%;
+}
+
+.select-category {
+    margin: 0 0 0 47%;
+    width: 50%;
+}
+
+/*---------------------------- sobre escrbiendo clases--------------*/
+
+.mat-toolbar.mat-primary {
+    background: linear-gradient(0deg,#1B86D5,#002B4A) !important;
+
+}
+
+/*------------------------- CLASES AGREGADAS -----------------------*/
+.cajaPrincipal_de_Header{
+    display: flex;
+    justify-content: space-between;
+}
+.caja_botones{
+    display: flex;
+    & .botns_menus{
+        width: 100px;
+        padding: 5px 0;
+        margin: 15px 20px;
+        color: #ffffff;
+        text-decoration: none;
+    }
+}
+
+.imagen_menu{
+    margin: 5% 5% 0 5%;
+
+}
+
+.caja_select{
+    display: none !important;
+    color: #ffffff;
+}
+
+.cardImag{
+    max-width: 400px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    &_imagenCard{
+        width: 80%;
+        margin-bottom: 15px;
+
+        & img{
+            width: 100%;
+        }
+    }
+    &_btnCard{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}
+
+
+
+
+/*-------------- MEDIAS QUERIES -------*/
+
+@media only screen and (max-width: 1260px) {
+    .caja_botones .botns_menus{
+        width: initial;    
+    }
+
+}
+
+@media only screen and (max-width: 980px) {
+   
+    // .cajaPrincipal_de_Header {
+    //     font-size: 16px;
+    // }
+
+    .caja_select{
+        display: initial !important;
+        width: 70%;
+    }
+    .botns_menus{
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 860px) {
+    // .caja_botones .botns_menus{
+    //     margin: 15px 12px;
+       
+    // }
+
+
+}
+
+@media only screen and (max-width: 760px) {
+    // .caja_botones .botns_menus{
+    //     margin: 15px 9px;
+       
+    // }
+
+
 }
